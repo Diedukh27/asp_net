@@ -1,5 +1,8 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
@@ -9,6 +12,7 @@ using System.Text;
 using WebGenQRCode.Data;
 using WebGenQRCode.Data.Entities.Identity;
 using WebGenQRCode.Extensions;
+using WebGenQRCode.Filters;
 using WebGenQRCode.Interfaces;
 using WebGenQRCode.Jobs;
 using WebGenQRCode.Services;
@@ -118,6 +122,27 @@ builder.Services.AddQuartz(q => {
 builder.Services.AddQuartzHostedService(options =>
 {
     options.WaitForJobsToComplete = true;
+});
+
+
+// FluentValidation
+builder.Services.AddValidatorsFromAssemblyContaining<LoginModelValidator>();
+
+// MVC Filter and Options
+builder.Services.Configure<MvcOptions>(options =>
+{
+    options.Filters.Add<ValidationFilter>();
+});
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = long.MaxValue;
+    options.MultipartHeadersLengthLimit = int.MaxValue;
 });
 
 var app = builder.Build();

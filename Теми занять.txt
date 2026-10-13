@@ -11,3 +11,4 @@
 11.Пагінація та ефективне читання даних у ASP.NET Core Web API
 12.Пагінація та ефективне читання даних у ASP.NET Core Web API
 13.Пошук даних на сайті користувачів у ASP.NET Core Web API
+14.Працюємо із валідацією даних Fluent Validation ASP.NET Core API
