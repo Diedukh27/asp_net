@@ -16,6 +16,7 @@ using WebGenQRCode.Filters;
 using WebGenQRCode.Interfaces;
 using WebGenQRCode.Jobs;
 using WebGenQRCode.Services;
+using WebGenQRCode.Validators.Account;
 
 var builder = WebApplication.CreateBuilder(args);
 
