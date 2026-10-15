@@ -107,5 +107,36 @@ public class QrCodesController(AppQrDbContext appQrDbContext,
         return Ok();
     }
 
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetQrCodeById(int id)
+    {
+        var email = User.FindFirstValue(ClaimTypes.Email)
+            ?? User.FindFirstValue("email");
+        if (string.IsNullOrEmpty(email))
+            return Unauthorized();
+
+        var user = await userManager.FindByEmailAsync(email);
+        if (user == null)
+            return NotFound();
+
+        var qrCode = await appQrDbContext.QrCodes
+            .Where(q => q.Id == id && q.UserId == user.Id)
+            .Select(q => new QrCodeItemModel
+            {
+                Id = q.Id,
+                Name = q.Name,
+                TargetUrl = q.TargetUrl,
+                Code = q.Code,
+                IsActive = q.IsActive,
+                CreateAt = q.CreateAt.ToString("dd.MM.yyyy HH:mm:ss"),
+                ScanCount = q.ScanCount
+            })
+            .FirstOrDefaultAsync();
+
+        if (qrCode == null)
+            return NotFound();
+
+        return Ok(qrCode);
+    }
 
 }
