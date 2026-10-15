@@ -71,6 +71,7 @@ public class QrCodesController(AppQrDbContext appQrDbContext,
         return Ok();
     }
 
+    [AllowAnonymous]
     [HttpGet("scan/{code}")]
     public async Task<IActionResult> ScanQrCode(string code)
     {
