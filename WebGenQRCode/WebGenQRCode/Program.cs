@@ -93,7 +93,8 @@ builder.Services.AddSwaggerGen(opt =>
     });
 });
 
-builder.Services.AddControllers();
+//builder.Services.AddControllers();
+builder.Services.AddControllersWithViews();
 
 const string reactCorsPolicy = "ReactClient";
 
@@ -175,6 +176,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseWhen(ctx => !ctx.Request.Path.StartsWithSegments("/api"), branch =>
+    branch.UseStatusCodePagesWithReExecute("/error/{0}"));
 
 //Не потрібно, бо працює через Quartz
 //await app.SeedData();

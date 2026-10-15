@@ -77,9 +77,9 @@ public class QrCodesController(AppQrDbContext appQrDbContext,
     {
         var qrCode = await appQrDbContext.QrCodes.FirstOrDefaultAsync(q => q.Code == code);
         if (qrCode == null)
-            return NotFound("QR-код не знайдено");
+            return Redirect("/error/404");
         if (!qrCode.IsActive)
-            return BadRequest("QR-код не активний");
+            return Redirect("/error/400");
 
         qrCode.ScanCount++; // Збільшуємо лічильник сканувань
         await appQrDbContext.SaveChangesAsync();
