@@ -11,4 +11,8 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<FuelTypeEntity> FuelTypes { get; set; }
+    public DbSet<VehicleStatusEntity> VehicleStatuses { get; set; }
+    public DbSet<LeadStatusEntity> LeadStatuses { get; set; }
+    public DbSet<BodyTypeEntity> BodyTypes { get; set; }
+    public DbSet<BrandEntity> Brands { get; set; }
 }

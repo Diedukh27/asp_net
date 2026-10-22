@@ -1,0 +1,19 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain.Entities;
+
+/// <summary>Статус заявки: Нова, В роботі, Виконана, Відхилена.</summary>
+[Table("lead_statuses")]
+[Index(nameof(Name), IsUnique = true)]
+public class LeadStatusEntity
+{
+    [Key]
+    public int Id { get; set; }
+
+    [Required, MaxLength(50)]
+    public string Name { get; set; } = null!;
+
+    //public ICollection<Lead> Leads { get; set; } = new List<Lead>();
+}
