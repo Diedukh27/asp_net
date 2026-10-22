@@ -16,5 +16,5 @@ public class FuelTypeEntity
 
     [Required, MaxLength(50)]
     public string Name { get; set; } = null!;
-    //public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
+    public ICollection<VehicleEntity> Vehicles { get; set; } = new List<VehicleEntity>();
 }

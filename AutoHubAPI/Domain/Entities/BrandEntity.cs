@@ -15,5 +15,5 @@ public class BrandEntity
     [Required, MaxLength(100)]
     public string Name { get; set; } = null!;
 
-    //public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
+    public ICollection<VehicleEntity> Vehicles { get; set; } = new List<VehicleEntity>();
 }

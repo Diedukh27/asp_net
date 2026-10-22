@@ -30,5 +30,5 @@ public class BodyTypeEntity
 
     public int SortOrder { get; set; }
 
-    //public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
+    public ICollection<VehicleEntity> Vehicles { get; set; } = new List<VehicleEntity>();
 }

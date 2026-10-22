@@ -15,5 +15,5 @@ public class LeadStatusEntity
     [Required, MaxLength(50)]
     public string Name { get; set; } = null!;
 
-    //public ICollection<Lead> Leads { get; set; } = new List<Lead>();
+    public ICollection<LeadEntity> Leads { get; set; } = new List<LeadEntity>();
 }
